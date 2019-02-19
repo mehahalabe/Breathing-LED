@@ -167,53 +167,53 @@ delay1								;delay for light on
 	
 floop
 	LDR R12, =GPIO_PORTE_DATA_R
-	LDR R3, =cycles
+	LDR R3, =cycles					;R3 has 98% duty cycle
 	LDR R2,[R3]
 	LDR R3,[R3]
-	LDR R5,=amt
+	LDR R5,=amt						;R5 has total cycles
 	LDR R5,[R5]
-	LDR R11,=value
+	LDR R11,=value					;R11 has incrementing value (2%)
 	LDR R11,[R11]
 delay2
-	SUBS R3, #1
+	SUBS R3, #1						;delay for light off
 	BNE delay2
 	AND R8,R8,#0
 	ORR R8,R8,#0x08
 	STR R8,[R12]
-	SUBS R3,R5,R2
+	SUBS R3,R5,R2					;R3 has duty cycle for light on
 delay3
-	SUBS R3,#1
+	SUBS R3,#1						;delay for light on
 	BNE delay3
 	SUBS R3,R2,R11
-	SUBS R2,R2,R11	;R2 has 0 after cycles is done
-	BNE nzdelay
-debreathe	 
+	SUBS R2,R2,R11					;R2 has 0 after all cycles are done
+	BNE nzdelay						;if not 0 continue increasing cycle
+debreathe	 						;if max duty cycle has been hit, decrease increment
 	ADD R2,R2,R11
 	ADD R3,R3,R2
-delay4
+delay4								;delay for light off decreasing duty cycle
 	SUBS R3, #1
 	BNE delay4
 	AND R8,R8,#0
 	ORR R8,R8,#0x08
 	STR R8,[R12]
-	SUBS R3,R5,R2
-delay5
+	SUBS R3,R5,R2					;duty cycle for on
+delay5								;delay for light on
 	SUBS R3,#1
 	BNE delay5
 	LDR R3, =cycles
 	LDR R3,[R3]
-	CMP R2,R3
+	CMP R2,R3						;check if it has hit max
 	AND R8,R8,#0
 	STR R8,[R12]
-	BNE debreathe
-nzdelay
-	AND R8,R8,#0
-	STR R8,[R12]
-	LDR R9, =GPIO_PORTF_DATA_R	;check for 0
+	BNE debreathe					;branch to decrease brightness
+nzdelay								
+	AND R8,R8,#0						
+	STR R8,[R12]					;turn led off
+	LDR R9, =GPIO_PORTF_DATA_R		
 	LDR R10,[R9]
-	SUBS R10,R10,#0X10
-	BEQ dloop 
-	B delay2
+	SUBS R10,R10,#0X10				;check portf is zero/released
+	BEQ dloop 						;if yes, return to basic duty cycle
+	B delay2						;if not, continue breathing
      B    loop
 
       

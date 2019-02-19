@@ -295,61 +295,77 @@ ARM Macro Assembler    Page 5
   167 00000104         
   168 00000104         floop
   169 00000104 F8DF C0A8       LDR              R12, =GPIO_PORTE_DATA_R
-  170 00000108 4B2C            LDR              R3, =cycles
+  170 00000108 4B2C            LDR              R3, =cycles ;R3 has 98% duty cy
+                                                            cle
   171 0000010A 681A            LDR              R2,[R3]
   172 0000010C 681B            LDR              R3,[R3]
-  173 0000010E 4D2C            LDR              R5,=amt
+  173 0000010E 4D2C            LDR              R5,=amt     ;R5 has total cycle
+                                                            s
   174 00000110 682D            LDR              R5,[R5]
-  175 00000112 F8DF B0B0       LDR              R11,=value
+  175 00000112 F8DF B0B0       LDR              R11,=value  ;R11 has incrementi
+                                                            ng value (2%)
   176 00000116 F8DB B000       LDR              R11,[R11]
   177 0000011A         delay2
-  178 0000011A 3B01            SUBS             R3, #1
+  178 0000011A 3B01            SUBS             R3, #1      ;delay for light of
+                                                            f
   179 0000011C D1FD            BNE              delay2
   180 0000011E F008 0800       AND              R8,R8,#0
   181 00000122 F048 0808       ORR              R8,R8,#0x08
   182 00000126 F8CC 8000       STR              R8,[R12]
-  183 0000012A 1AAB            SUBS             R3,R5,R2
+  183 0000012A 1AAB            SUBS             R3,R5,R2    ;R3 has duty cycle 
+                                                            for light on
   184 0000012C         delay3
-  185 0000012C 3B01            SUBS             R3,#1
+  185 0000012C 3B01            SUBS             R3,#1       ;delay for light on
+                                                            
   186 0000012E D1FD            BNE              delay3
   187 00000130 EBB2 030B       SUBS             R3,R2,R11
-  188 00000134 EBB2 020B       SUBS             R2,R2,R11   ;R2 has 0 after cyc
-                                                            les is done
-  189 00000138 D114            BNE              nzdelay
-  190 0000013A         debreathe
-  191 0000013A 445A            ADD              R2,R2,R11
-  192 0000013C 4413            ADD              R3,R3,R2
-  193 0000013E         delay4
-  194 0000013E 3B01            SUBS             R3, #1
-  195 00000140 D1FD            BNE              delay4
-  196 00000142 F008 0800       AND              R8,R8,#0
+  188 00000134 EBB2 020B       SUBS             R2,R2,R11   ;R2 has 0 after all
+                                                             cycles are done
+  189 00000138 D114            BNE              nzdelay     ;if not 0 continue 
+                                                            increasing cycle
 
 
 
 ARM Macro Assembler    Page 6 
 
 
+  190 0000013A         debreathe                            ;if max duty cycle 
+                                                            has been hit, decre
+                                                            ase increment
+  191 0000013A 445A            ADD              R2,R2,R11
+  192 0000013C 4413            ADD              R3,R3,R2
+  193 0000013E         delay4                               ;delay for light of
+                                                            f decreasing duty c
+                                                            ycle
+  194 0000013E 3B01            SUBS             R3, #1
+  195 00000140 D1FD            BNE              delay4
+  196 00000142 F008 0800       AND              R8,R8,#0
   197 00000146 F048 0808       ORR              R8,R8,#0x08
   198 0000014A F8CC 8000       STR              R8,[R12]
-  199 0000014E 1AAB            SUBS             R3,R5,R2
-  200 00000150         delay5
+  199 0000014E 1AAB            SUBS             R3,R5,R2    ;duty cycle for on
+  200 00000150         delay5                               ;delay for light on
+                                                            
   201 00000150 3B01            SUBS             R3,#1
   202 00000152 D1FD            BNE              delay5
   203 00000154 4B19            LDR              R3, =cycles
   204 00000156 681B            LDR              R3,[R3]
-  205 00000158 429A            CMP              R2,R3
+  205 00000158 429A            CMP              R2,R3       ;check if it has hi
+                                                            t max
   206 0000015A F008 0800       AND              R8,R8,#0
   207 0000015E F8CC 8000       STR              R8,[R12]
-  208 00000162 D1EA            BNE              debreathe
+  208 00000162 D1EA            BNE              debreathe   ;branch to decrease
+                                                             brightness
   209 00000164         nzdelay
   210 00000164 F008 0800       AND              R8,R8,#0
-  211 00000168 F8CC 8000       STR              R8,[R12]
-  212 0000016C F8DF 9048       LDR              R9, =GPIO_PORTF_DATA_R 
-                                                            ;check for 0
+  211 00000168 F8CC 8000       STR              R8,[R12]    ;turn led off
+  212 0000016C F8DF 9048       LDR              R9, =GPIO_PORTF_DATA_R
   213 00000170 F8D9 A000       LDR              R10,[R9]
-  214 00000174 F1BA 0A10       SUBS             R10,R10,#0X10
-  215 00000178 D092            BEQ              dloop
-  216 0000017A E7CE            B                delay2
+  214 00000174 F1BA 0A10       SUBS             R10,R10,#0X10 ;check portf is z
+                                                            ero/released
+  215 00000178 D092            BEQ              dloop       ;if yes, return to 
+                                                            basic duty cycle
+  216 0000017A E7CE            B                delay2      ;if not, continue b
+                                                            reathing
   217 0000017C E78A            B                loop
   218 0000017E         
   219 0000017E         
@@ -372,6 +388,12 @@ ARM Macro Assembler    Page 6
               400243FC 
               00000000 
               400253FC 
+
+
+
+ARM Macro Assembler    Page 7 
+
+
               00000000 
               00000000 
               00000000 
