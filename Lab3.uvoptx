@@ -79,8 +79,8 @@
       </OPTFL>
       <CpuCode>4</CpuCode>
       <DebugOpt>
-        <uSim>0</uSim>
-        <uTrg>1</uTrg>
+        <uSim>1</uSim>
+        <uTrg>0</uTrg>
         <sLdApp>1</sLdApp>
         <sGomain>1</sGomain>
         <sRbreak>1</sRbreak>
@@ -117,6 +117,10 @@
         <pMon>BIN\lmidk-agdi.dll</pMon>
       </DebugOpt>
       <TargetDriverDllRegistry>
+        <SetRegEntry>
+          <Number>0</Number>
+          <Key>DLGUARM</Key>
+        </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
           <Key>PORTE_SW3</Key>
@@ -187,56 +191,8 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>155</LineNumber>
+          <LineNumber>120</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>878</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.s</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\155</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>151</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>864</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.s</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\151</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>147</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>858</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.s</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\147</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>127</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
           <Address>814</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
@@ -246,172 +202,156 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\main.s</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\127</Expression>
+          <Expression>\\Lab3\main.s\120</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>119</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>812</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\main.s</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab3\main.s\119</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>167</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
+          <Address>904</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\main.s</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab3\main.s\167</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>230</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>1034</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\main.s</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Lab3\main.s\230</Expression>
         </Bp>
         <Bp>
           <Number>4</Number>
           <Type>0</Type>
-          <LineNumber>163</LineNumber>
+          <LineNumber>116</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>896</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
+          <BreakIfRCount>0</BreakIfRCount>
           <Filename>.\main.s</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\163</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>5</Number>
           <Type>0</Type>
-          <LineNumber>162</LineNumber>
+          <LineNumber>117</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>894</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
+          <BreakIfRCount>0</BreakIfRCount>
           <Filename>.\main.s</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\162</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>6</Number>
           <Type>0</Type>
-          <LineNumber>117</LineNumber>
+          <LineNumber>150</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>802</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
+          <BreakIfRCount>0</BreakIfRCount>
           <Filename>.\main.s</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\117</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>7</Number>
           <Type>0</Type>
-          <LineNumber>116</LineNumber>
+          <LineNumber>157</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>800</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
+          <BreakIfRCount>0</BreakIfRCount>
           <Filename>.\main.s</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\116</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>8</Number>
           <Type>0</Type>
-          <LineNumber>154</LineNumber>
+          <LineNumber>158</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>874</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
+          <BreakIfRCount>0</BreakIfRCount>
           <Filename>.\main.s</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\154</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>9</Number>
           <Type>0</Type>
-          <LineNumber>158</LineNumber>
+          <LineNumber>164</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>886</Address>
+          <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
+          <BreakIfRCount>0</BreakIfRCount>
           <Filename>.\main.s</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\158</Expression>
+          <Expression></Expression>
         </Bp>
         <Bp>
           <Number>10</Number>
           <Type>0</Type>
-          <LineNumber>150</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>862</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.s</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\150</Expression>
-        </Bp>
-        <Bp>
-          <Number>11</Number>
-          <Type>0</Type>
-          <LineNumber>159</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>888</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.s</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\159</Expression>
-        </Bp>
-        <Bp>
-          <Number>12</Number>
-          <Type>0</Type>
-          <LineNumber>191</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>958</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.s</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\191</Expression>
-        </Bp>
-        <Bp>
-          <Number>13</Number>
-          <Type>0</Type>
-          <LineNumber>196</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>966</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.s</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Lab3\main.s\196</Expression>
-        </Bp>
-        <Bp>
-          <Number>14</Number>
-          <Type>0</Type>
-          <LineNumber>141</LineNumber>
+          <LineNumber>166</LineNumber>
           <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -475,6 +415,13 @@
       <pszMrulep></pszMrulep>
       <pSingCmdsp></pSingCmdsp>
       <pMultCmdsp></pMultCmdsp>
+      <LogicAnalyzers>
+        <Wi>
+          <IntNumber>0</IntNumber>
+          <FirstString>((PORTE &amp; 0X00000008)&gt;&gt;3 &amp; 0x8) &gt;&gt; 3</FirstString>
+          <SecondString>FF00000000000000000000000000E0FFFFFFEF410100000000000000000000000000000028504F52544520262030583030303030303038293E3E330000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000001000000000000000000F03F18000000000000000000000000000000000000006C020000</SecondString>
+        </Wi>
+      </LogicAnalyzers>
       <SystemViewers>
         <Entry>
           <Name>System Viewer\GPIOE</Name>

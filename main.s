@@ -54,9 +54,13 @@ SYSCTL_RCGCGPIO_R  EQU 0x400FE608
 cycles DCD 196000
 value DCD 4000
 amt DCD 200000
-duty DCD 9000000,7000000,5000000,3000000,1000000
-evalue DCD 10000000
-subval DCD 1000000
+duty DCD 8360000,5960000,3578060,1206120,10730000
+;duty DCD 9000000,7000000,5000000,3000000,1000000
+;dutyON DCD 1000000,3000000,5000000,7000000,9000000
+;subval DCD 1000000
+dutyON DCD 1998060,3320000,4641940,5980000,676120
+evalue DCD 11150000
+subval DCD 10730000
 	   THUMB
        EXPORT  Start
 Start
@@ -106,15 +110,18 @@ Start
 	BIC R0,R0,#0X10
 	STRB R0,[R1]
 	
-     CPSIE  I    ; TExaS voltmeter, scope runs on interrupts
+     CPSIE  I    ; TExaS voltmeter, scope runs on interrupt
+
+	
 loop  
 ; main engine goes here
-	
+
 	LDR R4,=duty					;load variables into registers
 	LDR R6,[R4]
 	LDR R8,[R4]
+	LDR R1,=dutyON
 	LDR R7,=evalue
-	LDR R7,[R7]
+	LDR R7,[R4]
 
 	
 dloop
@@ -132,10 +139,11 @@ check
 addloop
 	LDR R5, =subval					
 	LDR R5,[R5]						;R5 stores the value to be subtracted from
-	LDR R6,[R4]
+	LDR R6,[R4]						;R6 VALUE FROM ARRAY
 	SUBS R10,R6,R5					
 	BEQ loop						;Branch back to loop the array if at end
 	ADD R4,R4,#4					;move to next value in array
+	ADD R1,R1,#4
 	LDR R6,[R4]	
 	LDR R8,[R4]
 dutyCycleLoop
@@ -144,20 +152,25 @@ dutyCycleLoop
 	LDR R10,[R9]
 	CMP R10,#0						;check to see if pf4 has been pressed
 	BEQ floop						;branch to breathing
-	LDR R6, [R4]	
+	LDR R6, [R4]
+	LDR R8,[R4]
+	
 delay								;run the duty cycle
 	SUBS R6,#1
 	BNE delay
-	AND R1,R1,#0
-	ORR R1,R1,#0X08
-	STR R1,[R2]						;turn the light on
-	SUBS R9,R7,R8
-	SUBS R10,R7,R8
+	
+	AND R3,R3,#0
+	ORR R3,R3,#0X08
+	
+	STR R3,[R2]						;turn the light on
+	
+	LDR R9,[R1]
 delay1								;delay for light on
 	SUBS R9,#1
 	BNE delay1
-	AND R1,R1,#0				
-	STR R1,[R2]						;turn light off
+	
+	AND R3,R3,#0xF7				
+	STR R3,[R2]						;turn light off
 
 	LDR R2,=GPIO_PORTE_DATA_R
 	LDR R3,[R2]
@@ -167,54 +180,59 @@ delay1								;delay for light on
 	
 floop
 	LDR R12, =GPIO_PORTE_DATA_R
-	LDR R3, =cycles					;R3 has 98% duty cycle
+	LDR R3, =cycles
 	LDR R2,[R3]
 	LDR R3,[R3]
-	LDR R5,=amt						;R5 has total cycles
+	LDR R5,=amt
 	LDR R5,[R5]
-	LDR R11,=value					;R11 has incrementing value (2%)
+	LDR R11,=value
 	LDR R11,[R11]
+	
 delay2
-	SUBS R3, #1						;delay for light off
+	SUBS R3, #1
 	BNE delay2
+	
 	AND R8,R8,#0
 	ORR R8,R8,#0x08
 	STR R8,[R12]
-	SUBS R3,R5,R2					;R3 has duty cycle for light on
+	SUBS R3,R5,R2
 delay3
-	SUBS R3,#1						;delay for light on
+	SUBS R3,#1
 	BNE delay3
+	
 	SUBS R3,R2,R11
-	SUBS R2,R2,R11					;R2 has 0 after all cycles are done
-	BNE nzdelay						;if not 0 continue increasing cycle
-debreathe	 						;if max duty cycle has been hit, decrease increment
+	SUBS R2,R2,R11	;R2 has 0 after cycles is done
+	BNE nzdelay
+debreathe	 
 	ADD R2,R2,R11
-	ADD R3,R3,R2
-delay4								;delay for light off decreasing duty cycle
+	MOV R3,R2
+delay4
 	SUBS R3, #1
 	BNE delay4
+	
 	AND R8,R8,#0
 	ORR R8,R8,#0x08
 	STR R8,[R12]
-	SUBS R3,R5,R2					;duty cycle for on
-delay5								;delay for light on
+	SUBS R3,R5,R2
+delay5
 	SUBS R3,#1
 	BNE delay5
-	LDR R3, =cycles
-	LDR R3,[R3]
-	CMP R2,R3						;check if it has hit max
+	
 	AND R8,R8,#0
 	STR R8,[R12]
-	BNE debreathe					;branch to decrease brightness
-nzdelay								
-	AND R8,R8,#0						
-	STR R8,[R12]					;turn led off
-	LDR R9, =GPIO_PORTF_DATA_R		
+	LDR R3, =cycles
+	LDR R3,[R3]
+	CMP R2,R3
+	BNE debreathe
+nzdelay
+	AND R8,R8,#0
+	STR R8,[R12]
+	LDR R9, =GPIO_PORTF_DATA_R	;check for 0
 	LDR R10,[R9]
-	SUBS R10,R10,#0X10				;check portf is zero/released
-	BEQ dloop 						;if yes, return to basic duty cycle
-	B delay2						;if not, continue breathing
-     B    loop
+	SUBS R10,R10,#0X10
+	BEQ dloop 
+	B delay2
+    ; B    loop
 
       
      ALIGN      ; make sure the end of this section is aligned
